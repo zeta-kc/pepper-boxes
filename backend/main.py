@@ -11,28 +11,28 @@ import printgcal
 @route('/hello/<name>')
 def index(name):
     """
-    for test funtion
+    Test funtion
     """
     return template('<b>Hello {{name}}</b>!', name=name)
 
 @route('/call')
 def call():
     """
-    Call to Mr. Hashimoto via Skype voice message
+    Call to a personnel via voice message or instant messege
     """
     return ""
 
 @route('/schedule')
 def get_schedule():
     """
-    Get Mr. Nomizu's schedule from google calendar
+    Get Boss's schedule from google calendar
     """
     return ""
 
 @route('/print/schedule')
 def print_schedule():
     """
-    Print Mr. Nomizu's schedule from specified printer
+    Print Boss's schedule from specified printer
     """
     printgcal.print_calendar()
     return ""
