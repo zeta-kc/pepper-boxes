@@ -4,10 +4,15 @@
 print schedule from google calendar
 """
 
+# standard libraries
+from datetime import datetime as dt
 import socket
+
+# extend libraries
 from bottle import template
 import pdfkit
 
+# constants
 PORT_JETDIRECT = 9100
 TEMP_PDF_FILE = 'out.pdf'
 PRINTER_HOST = '127.0.0.1'
@@ -17,7 +22,8 @@ def create_pdf_file():
     create pdf file function
     """
     schedule = ['10:00-11:00 会議1', '11:00-12:00 会議2']
-    html = template('schedule', date='1/1', schedule=schedule)
+    now = dt.now().strftime('%Y/%m/%d')
+    html = template('schedule', date=now, schedule=schedule)
     options = {
         'page-size': 'A4',
         'margin-top': '0.1in',
