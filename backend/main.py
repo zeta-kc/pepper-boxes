@@ -34,6 +34,7 @@ def print_schedule():
     """
     Print Mr. Nomizu's schedule from specified printer
     """
+    printgcal.print_calendar()
     return ""
 
 """
