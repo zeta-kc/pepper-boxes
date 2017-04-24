@@ -1,12 +1,13 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
-
 """
 main block for backend modules
 """
 
 from bottle import route, run, template
 import printgcal
+import pushcall
+
 
 @route('/hello/<name>')
 def index(name):
@@ -15,12 +16,15 @@ def index(name):
     """
     return template('<b>Hello {{name}}</b>!', name=name)
 
+
 @route('/call')
 def call():
     """
     Call to a personnel via voice message or instant messege
     """
+    pushcall.notify()
     return ""
+
 
 @route('/schedule')
 def get_schedule():
@@ -29,6 +33,7 @@ def get_schedule():
     """
     return ""
 
+
 @route('/print/schedule')
 def print_schedule():
     """
@@ -36,6 +41,7 @@ def print_schedule():
     """
     printgcal.print_calendar()
     return ""
+
 
 """
 Start server

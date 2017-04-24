@@ -17,6 +17,7 @@ PORT_JETDIRECT = 9100
 TEMP_PDF_FILE = 'out.pdf'
 PRINTER_HOST = '127.0.0.1'
 
+
 def create_pdf_file():
     """
     create pdf file function
@@ -35,6 +36,7 @@ def create_pdf_file():
     }
     pdfkit.from_string(html, TEMP_PDF_FILE, options=options)
 
+
 def print_pdf(host_name, file_name):
     """
     Print pdf file via TCP/IP(JetDirect) function
@@ -45,13 +47,15 @@ def print_pdf(host_name, file_name):
         client.connect((host_name, PORT_JETDIRECT))
         client.send(buf)
 
+
 def print_calendar():
     """
     print schedule from google calendar function
     """
-    #Get calendar
+    # Get calendar
     create_pdf_file()
-    #print_pdf(PRINTER_HOST, TEMP_PDF_FILE)
+    # print_pdf(PRINTER_HOST, TEMP_PDF_FILE)
+
 
 if __name__ == "__main__":
     print_calendar()
