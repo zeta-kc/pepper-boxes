@@ -6,6 +6,7 @@ main block for backend modules
 
 from bottle import route, run, template
 import printgcal
+import pushcall
 
 
 @route('/hello/<name>')
@@ -21,6 +22,7 @@ def call():
     """
     Call to a personnel via voice message or instant messege
     """
+    pushcall.notify()
     return ""
 
 
