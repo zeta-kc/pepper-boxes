@@ -11,8 +11,7 @@ from apiclient import discovery
 from oauth2client import client
 from oauth2client import tools
 from oauth2client.file import Storage
-
-import datetime
+from datetime import datetime
 import json
 try:
     import argparse
@@ -56,18 +55,18 @@ def get_credentials():
     return credentials
 
 def get_credentials():
-    """Shows basic usage of the Google Calendar API.
-
-    Creates a Google Calendar API service object and outputs a list of the next
-    10 events on the user's calendar.
+    """
+    Shows basic usage of the Google Calendar API.
+    Creates a Google Calendar API service object and outputs a list of one day events on the user's calendar.
     """
     credentials = get_credentials()
     http = credentials.authorize(httplib2.Http())
     service = discovery.build('calendar', 'v3', http=http)
 
-    now = datetime.datetime.utcnow().isoformat() + 'Z' # 'Z' indicates UTC time
+    now = datetime.utcnow()
+    end_time = now.replace(hour=14).replace(minute=59).replace(second=59).replace(microsecond=0) #timezone -9
     eventsResult = service.events().list(
-        calendarId='primary', timeMin=now, maxResults=10, singleEvents=True,
+        calendarId='primary', timeMin=now.isoformat() + 'Z', timeMax=end_time.isoformat() + 'Z', singleEvents=True,
         orderBy='startTime').execute()
     events = eventsResult.get('items', [])
     datas = []
