@@ -7,6 +7,7 @@ main block for backend modules
 
 from bottle import route, run, template
 import printgcal
+import gcal
 
 @route('/hello/<name>')
 def index(name):
@@ -27,7 +28,8 @@ def get_schedule():
     """
     Get Boss's schedule from google calendar
     """
-    return ""
+    calendar = gcal.fetch_calendar()
+    return calendar
 
 @route('/print/schedule')
 def print_schedule():
