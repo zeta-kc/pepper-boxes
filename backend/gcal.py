@@ -4,15 +4,17 @@
 fetch schedule from google calendar
 """
 from __future__ import print_function
-import httplib2
+
+from datetime import datetime
+import json
 import os
 
+import httplib2
 from apiclient import discovery
 from oauth2client import client
 from oauth2client import tools
 from oauth2client.file import Storage
-from datetime import datetime
-import json
+
 try:
     import argparse
     flags = argparse.ArgumentParser(parents=[tools.argparser]).parse_args()
@@ -54,7 +56,7 @@ def get_credentials():
         print('Storing credentials to ' + credential_path)
     return credentials
 
-def get_credentials():
+def fetch_calendar():
     """
     Shows basic usage of the Google Calendar API.
     Creates a Google Calendar API service object and outputs a list of one day events on the user's calendar.
@@ -78,3 +80,6 @@ def get_credentials():
         }
         datas.append(data)
     return json.dumps({"events": datas})
+
+if __name__ == '__main__':
+    fetch_calendar()
