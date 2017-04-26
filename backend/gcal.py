@@ -49,12 +49,13 @@ def get_credentials():
         flow.user_agent = APPLICATION_NAME
         if flags:
             credentials = tools.run_flow(flow, store, flags)
-        else: # Needed only for compatibility with Python 2.6
+        else:
             credentials = tools.run(flow, store)
         print('Storing credentials to ' + credential_path)
     return credentials
 
-def get_credentials():
+
+def fetch_calendar():
     """
     Shows basic usage of the Google Calendar API.
     Creates a Google Calendar API service object and outputs a list of one day events on the user's calendar.
@@ -64,7 +65,7 @@ def get_credentials():
     service = discovery.build('calendar', 'v3', http=http)
 
     now = datetime.utcnow()
-    end_time = now.replace(hour=14).replace(minute=59).replace(second=59).replace(microsecond=0) #timezone -9
+    end_time = now.replace(hour=14).replace(minute=59).replace(second=59).replace(microsecond=0)  # timezone -9
     eventsResult = service.events().list(
         calendarId='primary', timeMin=now.isoformat() + 'Z', timeMax=end_time.isoformat() + 'Z', singleEvents=True,
         orderBy='startTime').execute()
