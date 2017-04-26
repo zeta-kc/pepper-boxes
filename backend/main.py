@@ -6,12 +6,8 @@ main block for backend modules
 
 from bottle import route, run, template
 import printgcal
-<<<<<<< HEAD
 import gcal
-=======
 import pushcall
-
->>>>>>> 55a641ae30381117214664673b74c358caab330d
 
 @route('/hello/<name>')
 def index(name):
