@@ -11,6 +11,6 @@ def notify():
     """
     push call notification.
     """
-    pushb = Pushbullet("o.9GpEBJ3D7pQzR5nAmEm3Fq5ywX3f2S50")
-    push = pushb.push_note("This is the title", "This is the body")
+    pushb = Pushbullet("o.ZhbZSPLdUVZ7dUlSBDqVAtzolFxaofG8")
+    push = pushb.push_note("野水さんから", "橋本さん、早く来て！")
     print push
