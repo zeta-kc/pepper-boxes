@@ -1,0 +1,5 @@
+bottle==0.12.13
+google-api-python-client==1.6.2
+pdfkit==0.6.1
+pushbullet.py==0.10.0
+python-dotenv==0.6.4
