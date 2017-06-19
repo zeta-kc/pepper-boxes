@@ -8,7 +8,7 @@ main block for backend modules
 import os
 
 # extend libraries
-from bottle import route, template
+from bottle import route, template, request
 
 # own modules
 import printgcal
@@ -51,6 +51,26 @@ def print_schedule():
     print 'main:print_schedule - called.'
     printgcal.print_calendar()
     return 'Done'
+
+# settingのhtml表示
+@route('/settings')
+def settings():
+    """
+    Setting menu to set Google Calendar, Drive, and pushbullet
+    """
+    print 'main:settings - called.'
+    return template('index')
+
+
+@route('/settings/<links>')
+def links(links):
+    """
+    Setting menu links
+    """
+    latlng = request.form.get("latlng")
+    return template('index')
+
+
 
 if __name__ == "__main__":
     """
