@@ -8,12 +8,16 @@ main block for backend modules
 import os
 
 # extend libraries
-from bottle import route, template
+from bottle import route, template, request, static_file
 
 # own modules
 import printgcal
 import gcal
 import pushcall
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_DIR = os.path.join(BASE_DIR, 'views\static')
+
 
 @route('/hello/<name>')
 def index(name):
@@ -21,7 +25,7 @@ def index(name):
     Test funtion
     """
     print 'main:index - called.'
-    return template('<b>Hello {{name}}</b>!', name=name)
+    return template('<b>Hello {{name}}</b>', name=name)
 
 
 @route('/call')
@@ -43,6 +47,7 @@ def get_schedule():
     calendar = gcal.fetch_calendar()
     return calendar
 
+
 @route('/print/schedule')
 def print_schedule():
     """
@@ -51,6 +56,23 @@ def print_schedule():
     print 'main:print_schedule - called.'
     printgcal.print_calendar()
     return 'Done'
+
+# settingのhtml表示
+
+
+@route('/settings')
+def settings():
+    """
+    Setting menu to set Google Calendar, Drive, and pushbullet
+    """
+    print 'main:settings - called.'
+    return template('index')
+
+
+# static file
+@route('/static/<filename:path>')
+def static_css(filename):
+    return static_file(filename, root=STATIC_DIR)
 
 if __name__ == "__main__":
     """
