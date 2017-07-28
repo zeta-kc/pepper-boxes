@@ -8,8 +8,12 @@ main block for backend modules
 import os
 
 # extend libraries
+<< << << < HEAD
 from bottle import route, template, request, static_file, HTTPResponse, redirect
 import requests
+== == == =
+from bottle import route, template, request, static_file
+>>>>>> > 3c7d891a92046ca15763b56614b7c8369cd88c56
 
 from oauth2client import client
 # own modules
@@ -23,13 +27,17 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_DIR = os.path.join(BASE_DIR, 'views\static')
 
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_DIR = os.path.join(BASE_DIR, 'views\static')
+
+
 @route('/hello/<name>')
 def index(name):
     """
     Test funtion
     """
     print 'main:index - called.'
-    return template('<b>Hello {{name}}</b>!', name=name)
+    return template('<b>Hello {{name}}</b>', name=name)
 
 
 @route('/call')
