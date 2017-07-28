@@ -8,12 +8,8 @@ main block for backend modules
 import os
 
 # extend libraries
-<< << << < HEAD
 from bottle import route, template, request, static_file, HTTPResponse, redirect
 import requests
-== == == =
-from bottle import route, template, request, static_file
->>>>>> > 3c7d891a92046ca15763b56614b7c8369cd88c56
 
 from oauth2client import client
 # own modules
