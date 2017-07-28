@@ -8,12 +8,24 @@ main block for backend modules
 import os
 
 # extend libraries
-from bottle import route, template
+from bottle import route, template, request, static_file, HTTPResponse, redirect
+import requests
 
+from oauth2client import client
 # own modules
 import printgcal
 import gcal
 import pushcall
+import setting
+import json
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_DIR = os.path.join(BASE_DIR, 'views\static')
+
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_DIR = os.path.join(BASE_DIR, 'views\static')
+
 
 @route('/hello/<name>')
 def index(name):
@@ -21,7 +33,7 @@ def index(name):
     Test funtion
     """
     print 'main:index - called.'
-    return template('<b>Hello {{name}}</b>!', name=name)
+    return template('<b>Hello {{name}}</b>', name=name)
 
 
 @route('/call')
@@ -43,6 +55,7 @@ def get_schedule():
     calendar = gcal.fetch_calendar()
     return calendar
 
+
 @route('/print/schedule')
 def print_schedule():
     """
@@ -51,6 +64,34 @@ def print_schedule():
     print 'main:print_schedule - called.'
     printgcal.print_calendar()
     return 'Done'
+
+# settingのhtml表示
+
+
+@route('/settings')
+def settings():
+    """
+    Setting menu to set Google Calendar, Drive, and pushbullet
+    """
+    print 'main:settings - called.'
+    # return redirect(setting.login())
+    return template("login")
+
+
+@route('/settingcallback')
+def on_auth():
+    code = request.query.code
+    token = setting.get_credentials(code)
+    setting.add_environ(token)
+    return template('<b>access token = {{token}}<b>', token=token.access_token)
+
+# static file
+
+
+@route('/static/<filename:path>')
+def static_css(filename):
+    return static_file(filename, root=STATIC_DIR)
+
 
 if __name__ == "__main__":
     """
